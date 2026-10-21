@@ -1,0 +1,49 @@
+﻿<Window x:Class="laba_firts.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:model="clr-namespace:laba_firts.Model"
+        Title="TodoLIST" Height="600" Width="900" WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+            <Button Content="Добавить" Width="100" Margin="0,0,10,0" Click="BtnAdd_Click"/>
+            <Button Content="Удалить" Width="100" Margin="0,0,10,0" Click="BtnDelete_Click"/>
+            <Button Content="Сохранить" Width="100" Margin="0,0,10,0" Click="BtnSave_Click"/>
+            <Button Content="Загрузить" Width="100" Click="BtnLoad_Click"/>
+        </StackPanel>
+
+        <DataGrid Grid.Row="1" x:Name="GridTasks" AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Название" Binding="{Binding name}" Width="150"/>
+                <DataGridTextColumn Header="Описание" Binding="{Binding opis}" Width="*"/>
+                <DataGridTextColumn Header="Дата создания" Binding="{Binding CreatedAt}" Width="120"/>
+
+                <DataGridComboBoxColumn Header="Приоритет" SelectedItemBinding="{Binding Priority}" Width="120">
+                    <DataGridComboBoxColumn.ItemsSource>
+                        <x:Array Type="{x:Type model:Prioritet}">
+                            <model:Prioritet>low</model:Prioritet>
+                            <model:Prioritet>med</model:Prioritet>
+                            <model:Prioritet>high</model:Prioritet>
+                        </x:Array>
+                    </DataGridComboBoxColumn.ItemsSource>
+                </DataGridComboBoxColumn>
+
+             
+                <DataGridComboBoxColumn Header="Статус" SelectedItemBinding="{Binding Status}" Width="120">
+                    <DataGridComboBoxColumn.ItemsSource>
+                        <x:Array Type="{x:Type model:Status}">
+                            <model:Status>notstart</model:Status>
+                            <model:Status>process</model:Status>
+                            <model:Status>complite</model:Status>
+                        </x:Array>
+                    </DataGridComboBoxColumn.ItemsSource>
+                </DataGridComboBoxColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
